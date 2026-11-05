@@ -40,6 +40,14 @@ header{background:#0c0715ef;border-color:#4e2e62}.hero{background:radial-gradien
 @media(hover:hover) and (pointer:fine){button:hover,.action:hover,.cv:hover{box-shadow:4px 4px 0 #d476ff2a;border-color:#e5a5ff}.action:hover,.links a:last-child:hover{background:#efb0ff;color:#21082e}a:hover,.question summary:hover{color:#df8dff}}
 #welcome-intro,#welcome-intro::backdrop{background:#090613}.welcome-halo{background:linear-gradient(90deg,#090613 5%,transparent 70%),linear-gradient(transparent 98%,#d476ff0b 98%)}.welcome-grid{background:linear-gradient(#c47cff1a 1px,transparent 1px),linear-gradient(90deg,#c47cff1a 1px,transparent 1px)}.welcome-skip{border-color:#8653a0;background:#180d25;color:#e7d4f3}#welcome-title span{color:#d476ff}.welcome-progress{background:#d476ff;box-shadow:0 0 15px #d476ff90}.ambient-control{border-color:#8951a5;background:#140a20ed;color:#d476ff}.scroll-meter{background:#d476ff}
 
+/* Onyx / Electric Indigo / Tropical Mint palette */
+:root{--ink:#f5f1ff;--paper:#01010d;--line:#2d2265;--moss:#88f9c0;--accent:#88f9c0;--purple:#6331fb}
+body{background:#01010d}.brand b,.kicker:before,.kicker:after,.role,h2 i,.skill-foot small,.art small,.question b,.welcome-signature,.welcome-eyebrow,#welcome-title span,.welcome-bottom span:last-child{color:#88f9c0}
+header{background:#01010deF;border-color:#292050}.hero{background:radial-gradient(ellipse at 78% 18%,#6331fb38,transparent 52%);border-color:#292050}.hero:before{border-color:#6331fb30}.hero h1 span{background:linear-gradient(#fff,#c5b4ff);background-clip:text;-webkit-background-clip:text}.role:before{color:#b39cff}.intro{color:#c8c1e1}.label,.kicker,.sectionhead small{color:#c2b8ed}
+.links a:last-child,.action{background:#6331fb;border-color:#9d7bff;color:#fff}.cv{border-color:#56458d}.orbit-panel{background:#0d0b22b8;border-color:#5a49a2}.orbit-panel:before{border-color:#88f9c0}.orbit-heading{color:#88f9c0;border-color:#443a7a}.orbit-panel figcaption{color:#c2bae3}#globe-motion,.controls button{background:#100d27;border-color:#5a4a96;color:#f3efff}.rail{background:#0d0a22dd;border-color:#3b306f}.rail .wrap{color:#88f9c0}.content{border-color:#30265e}
+.skill-tile,.skill-tile:nth-child(even){--tone:#88f9c0!important;background:linear-gradient(110deg,#100d2df2,#090918f7);border-color:#514489}.skill-tile:before{background:linear-gradient(90deg,transparent 49.7%,#6331fb21 50%,transparent 50.3%),linear-gradient(transparent 49.7%,#6331fb21 50%,transparent 50.3%)}.skill-top small{color:#bdb5da}.skill-word{-webkit-text-stroke:1px #7b6ab1}.skill-word:after{color:#f4f0ff}.skill-foot p{color:#cec8e1}.project-select button{background:#0d0b20ef;border-color:#413575;color:#c7c0e2}.project-select button[aria-pressed=true]{color:#88f9c0;border-color:#88f9c0;background:#1b1550}.cards details{background:#0d0b20ef;border-color:#473a7d}.case{background:#0d0b20ef;border-color:#4a3d81}.instrument{background:#090817f5;border-color:#4d4086}.station circle{fill:#18133e;stroke:#7564c0}.station[aria-pressed=true] circle{fill:#88f9c0}.station[aria-pressed=true] text:not(.node-label){fill:#01010d}.current{stroke:#88f9c0}.readout,.controls{border-color:#403472}.brief{background:#0e0b22f5;border-color:#4d4084}.brief input,.brief select,.brief textarea{background:#050512;border-color:#40336e;color:#f4f0ff}.course{background:#110d2aea}.question{background:#080716b0}.history>small,.case-grid small,.question small{color:#9f8dff}.foot{color:#bbb1de}.signal{background:#88f9c0;box-shadow:0 0 8px #88f9c090}
+@media(hover:hover) and (pointer:fine){button:hover,.action:hover,.cv:hover{box-shadow:4px 4px 0 #88f9c026;border-color:#88f9c0}.action:hover,.links a:last-child:hover{background:#88f9c0;color:#01010d}a:hover,.question summary:hover{color:#88f9c0}}
+#welcome-intro,#welcome-intro::backdrop{background:#01010d}.welcome-halo{background:linear-gradient(90deg,#01010d 5%,transparent 70%),linear-gradient(transparent 98%,#6331fb10 98%)}.welcome-grid{background:linear-gradient(#6331fb20 1px,transparent 1px),linear-gradient(90deg,#6331fb20 1px,transparent 1px)}.welcome-skip{border-color:#6252a8;background:#0d0a21;color:#e8e3ff}#welcome-title span{color:#88f9c0}.welcome-progress{background:#88f9c0;box-shadow:0 0 15px #88f9c090}.ambient-control{border-color:#6452ad;background:#080717ed;color:#88f9c0}.scroll-meter{background:#88f9c0}
 </style></head><body id="top"><canvas id="cyber-background" aria-hidden="true"></canvas><div class="scroll-meter" aria-hidden="true"></div><button type="button" class="ambient-control" id="ambient-motion" aria-pressed="false">Pause background</button><dialog id="welcome-intro" aria-labelledby="welcome-title" aria-describedby="welcome-description">
   <div class="welcome-grid" aria-hidden="true"></div>
   <img class="welcome-portrait" src="assets/talha-dots.jpg" alt="" fetchpriority="high"><div class="welcome-halo" aria-hidden="true"></div>
@@ -168,7 +176,7 @@ function paintOrbit() {
   for(const [x,y,z] of surface) {
     const [px,py,depth]=project(x,y,z);
     if(depth<0) continue;
-  brush.fillStyle='rgba(193,112,255,'+(.13+.7*depth)+')';
+  brush.fillStyle='rgba(136,249,192,'+(.13+.7*depth)+')';
     brush.fillRect(px,py,1.15+depth*.5,1.15+depth*.5);
   }
   for(let route=0;route<3;route++){
@@ -284,20 +292,20 @@ document.querySelectorAll('.project-browser,.case,.inquiry-layout,.profile').for
  function draw(){
   ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,width,height);
   const step=width<600?86:110,shift=(smoothScroll*.12)%step;
-  ctx.strokeStyle='rgba(177,125,220,.065)';ctx.lineWidth=1;ctx.beginPath();
+  ctx.strokeStyle='rgba(99,49,251,.09)';ctx.lineWidth=1;ctx.beginPath();
   for(let x=24;x<width;x+=step){ctx.moveTo(x,0);ctx.lineTo(x,height)}
   for(let y=-shift;y<height;y+=step){ctx.moveTo(0,y);ctx.lineTo(width,y)}ctx.stroke();
   const positions=points.slice(0,width<600?22:42).map((p,i)=>({x:p.x*width+Math.sin(tick*.12+i)*12,y:((p.y*height-smoothScroll*p.speed*.16+tick*p.speed*4)%(height+90)+height+90)%(height+90)-45}));
   for(let i=0;i<positions.length;i++){
-   const p=positions[i];ctx.fillStyle=i%4===0?'rgba(209,109,255,.45)':'rgba(174,151,205,.22)';ctx.fillRect(p.x-1,p.y-1,2,2);
-   if(i%4===0){ctx.strokeStyle='rgba(193,112,255,.18)';ctx.strokeRect(p.x-4,p.y-4,8,8)}
+   const p=positions[i];ctx.fillStyle=i%4===0?'rgba(136,249,192,.48)':'rgba(156,132,255,.24)';ctx.fillRect(p.x-1,p.y-1,2,2);
+   if(i%4===0){ctx.strokeStyle='rgba(136,249,192,.2)';ctx.strokeRect(p.x-4,p.y-4,8,8)}
    for(let j=i+1;j<positions.length;j++){const q=positions[j],distance=Math.hypot(p.x-q.x,p.y-q.y);if(distance>165)continue;
-    ctx.strokeStyle='rgba(193,112,255,'+(.12*(1-distance/165))+')';ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,p.y);ctx.lineTo(q.x,q.y);ctx.stroke();
+    ctx.strokeStyle='rgba(99,49,251,'+(.16*(1-distance/165))+')';ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,p.y);ctx.lineTo(q.x,q.y);ctx.stroke();
    }
   }
   // Slow signal passing down the grid, offset by scroll position.
   const scan=((tick*22+smoothScroll*.22)%(height+180))-90;
-  const glow=ctx.createLinearGradient(0,scan-75,0,scan+75);glow.addColorStop(0,'transparent');glow.addColorStop(.5,'rgba(193,112,255,.04)');glow.addColorStop(1,'transparent');ctx.fillStyle=glow;ctx.fillRect(0,scan-75,width,150);
+  const glow=ctx.createLinearGradient(0,scan-75,0,scan+75);glow.addColorStop(0,'transparent');glow.addColorStop(.5,'rgba(99,49,251,.07)');glow.addColorStop(1,'transparent');ctx.fillStyle=glow;ctx.fillRect(0,scan-75,width,150);
  }
  function loop(time){if(time-last>40){tick+=Math.min(time-last,100)/1000;smoothScroll+=(scroll-smoothScroll)*.14;draw();last=time}frame=requestAnimationFrame(loop)}
  function sync(){cancelAnimationFrame(frame);toggle.textContent=paused?'Play background':'Pause background';toggle.setAttribute('aria-pressed',String(paused));if(!paused&&!document.hidden)frame=requestAnimationFrame(loop);else draw()}
