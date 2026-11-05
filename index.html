@@ -22,7 +22,141 @@ html{scroll-padding-top:104px}header{position:sticky;top:0;z-index:8;background:
 @media(max-width:480px){.field-pair{grid-template-columns:1fr;gap:0}}
 @media(prefers-reduced-motion:reduce){:is(button,.action,.cv,.links a:last-child,summary){transition:none}:is(button,.action,.cv,.links a:last-child):not(:disabled):hover{transform:none}}
 @media(min-width:761px) and (max-width:980px){.rail .wrap{flex-wrap:wrap;row-gap:6px}}
-</style></head><body id="top"><header><nav class="wrap" aria-label="Main navigation"><a class="brand" href="#top"><svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 29 16 4l18 25z M7 25l9-16 12 16z M12 22l5-8 6 8z"/></svg><span><b>MT</b><em>folio</em></span></a><div class="links"><a href="#skills">Skills</a><a href="#work">Work</a><a href="#workflow" class="flow-link">Workflow</a><a href="#profile">Résumé</a><a href="#faq" class="faq-nav">FAQ</a><a href="#contact">Contact ↗</a></div></nav></header><main><section class="hero"><div class="wrap poster"><div class="copy"><span class="kicker mono">Independent AI engineer</span><h1>Muhammad<br><span>Talha.</span></h1><p class="role">AI Engineer</p><p class="intro">I connect AI agents, APIs, and n8n workflows to turn manual research into structured, reviewable data.</p><div class="ctas"><a class="action" href="#work">Explore projects <b aria-hidden="true">↗</b></a><a class="cv" href="Muhammad-Talha-CV.docx" download>Download CV ↓</a></div></div><figure class="orbit-panel"><div class="orbit-heading mono"><span>◉ &nbsp; Network atlas</span><span>FIG. 01</span></div><canvas id="orbit" aria-label="Animated network sphere with three orbiting signals"></canvas><figcaption><span class="mono">Connected systems &nbsp; / &nbsp; AI</span><button id="globe-motion" type="button">Pause orbit</button></figcaption></figure></div></section><div class="rail"><div class="wrap mono"><span>✳ &nbsp; Web development</span><span>✳ &nbsp; App development</span><span>✳ &nbsp; Branding</span><span>✳ &nbsp; Automation</span><span>✳ &nbsp; Email marketing</span></div></div>
+
+/* Welcome sequence */
+html.welcome-active { overflow: hidden; }
+#welcome-intro {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  overflow: hidden;
+  color: #f5f2ff;
+  background: #06040e;
+  z-index: 50;
+}
+#welcome-intro::backdrop { background: #06040e; }
+.welcome-grid {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(#8879bb13 1px,transparent 1px),linear-gradient(90deg,#8879bb13 1px,transparent 1px);
+  background-size: 70px 70px;
+  mask-image: radial-gradient(ellipse at center,#000,transparent 75%);
+}
+.welcome-halo {
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  width: min(740px,120vw);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(ellipse,#6331fb55, #6331fb1c 36%,transparent 67%);
+  transform: translate(-50%,-50%);
+  animation: welcome-bloom 2.3s ease-out both;
+}
+.welcome-top,.welcome-bottom {
+  position: absolute;
+  left: 5vw;
+  right: 5vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  z-index: 2;
+}
+.welcome-top { top: clamp(20px,4vh,42px); }
+.welcome-signature { font: 800 24px Arial,sans-serif; letter-spacing: -2px; color: #88f9c0; }
+.welcome-signature span { font: italic 24px Georgia,serif; letter-spacing: -1px; color: #fff; margin-left: 3px; }
+.welcome-skip { color: #d4cade; background: #ffffff07; border: 1px solid #554468; border-radius: 30px; padding: 9px 15px; font: 12px Arial,sans-serif; letter-spacing: normal; text-transform: none; }
+.welcome-skip span { margin-left: 8px; color: #88f9c0; }
+.welcome-bottom { bottom: 32px; font: 10px ui-monospace,monospace; letter-spacing: .08em; text-transform: uppercase; color: #9d90b3; animation: welcome-rise .7s .8s both; }
+.welcome-bottom span:last-child { color: #b9dfce; }
+.welcome-center { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 85px 24px; text-align: center; }
+.welcome-orbit { position: relative; width: clamp(116px,19vh,180px); aspect-ratio: 1; display: grid; place-items: center; margin-bottom: 28px; animation: welcome-rise .8s both; }
+.welcome-orbit svg { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke: #88f9c0; stroke-width: 1; }
+.welcome-orbit .orbit-track { stroke: #77628b66; }
+.welcome-orbit .orbit-inner { stroke: #aa8dff44; stroke-dasharray: 2 6; }
+.welcome-orbit .orbit-draw { stroke-dasharray: 516; stroke-dashoffset: 516; transform: rotate(-90deg); transform-origin: center; animation: welcome-ring 1.8s .1s ease-out forwards; }
+.welcome-orbit>span { font: 800 clamp(42px,8vh,68px)/1 Arial,sans-serif; letter-spacing: -.09em; }
+.welcome-dot { color: #88f9c0; }
+.welcome-eyebrow { margin: 0 0 12px; color: #bca3ff; font: 10px ui-monospace,monospace; letter-spacing: .19em; text-transform: uppercase; animation: welcome-rise .7s .25s both; }
+#welcome-title { font: 650 clamp(34px,5.6vw,76px)/1.08 Arial,sans-serif; letter-spacing: -.06em; animation: welcome-rise .8s .35s both; }
+#welcome-title span { font: italic 1.15em Georgia,serif; color: #88f9c0; }
+#welcome-description { color: #c4b7d2; font: 14px/1.6 Arial,sans-serif; margin: 20px 0 0; animation: welcome-rise .8s .55s both; }
+.welcome-progress { position: absolute; bottom: 0; height: 2px; width: 100%; background: linear-gradient(90deg,#6331fb,#88f9c0); transform-origin: left; animation: welcome-progress 2.2s linear both; }
+#welcome-intro.welcome-leaving { animation: welcome-exit .6s cubic-bezier(.7,0,.25,1) forwards; pointer-events: none; }
+.welcome-leaving::backdrop { animation: welcome-backdrop .6s forwards; }
+.welcome-revealed .hero .copy { animation: welcome-rise .65s both; }
+@keyframes welcome-ring { to { stroke-dashoffset: 0; } }
+@keyframes welcome-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes welcome-bloom { from { opacity: 0; transform: translate(-50%,-50%) scale(.65); } to { opacity: 1; transform: translate(-50%,-50%) scale(1); } }
+@keyframes welcome-rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes welcome-exit { to { opacity: 0; transform: translateY(-5%); filter: blur(8px); } }
+@keyframes welcome-backdrop { to { background: transparent; } }
+@media (max-width:540px) { .welcome-bottom { font-size: 9px; } .welcome-bottom span:last-child { display: none; } }
+@media (max-height:500px) { .welcome-orbit { width: 90px; margin-bottom: 14px; } #welcome-description { margin-top: 10px; } .welcome-bottom { bottom: 18px; } }
+@media (prefers-reduced-motion:reduce) {
+  #welcome-intro { display: none; }
+  .welcome-revealed .hero .copy { animation: none; }
+}
+</style></head><body id="top"><dialog id="welcome-intro" aria-labelledby="welcome-title" aria-describedby="welcome-description">
+  <div class="welcome-grid" aria-hidden="true"></div>
+  <div class="welcome-halo" aria-hidden="true"></div>
+  <div class="welcome-top"><span class="welcome-signature">MT<span>folio</span></span><button type="button" class="welcome-skip">Skip intro <span aria-hidden="true">↗</span></button></div>
+  <div class="welcome-center">
+    <div class="welcome-orbit" aria-hidden="true"><svg viewBox="0 0 180 180"><circle class="orbit-track" cx="90" cy="90" r="82"/><circle class="orbit-draw" cx="90" cy="90" r="82"/><path d="M90 0v17m0 146v17M0 90h17m146 0h17"/><circle class="orbit-inner" cx="90" cy="90" r="65"/></svg><span>MT<span class="welcome-dot">.</span></span></div>
+    <p class="welcome-eyebrow">A little introduction</p>
+    <h2 id="welcome-title">Hello, I’m <span>Talha.</span></h2>
+    <p id="welcome-description">AI Engineer &nbsp; / &nbsp; Welcome to my portfolio</p>
+  </div>
+  <div class="welcome-bottom"><span>Ideas into working systems</span><span>Explore what’s possible ↓</span></div>
+  <div class="welcome-progress" aria-hidden="true"></div>
+</dialog>
+<script>
+(function startWelcome() {
+  const intro = document.querySelector('#welcome-intro');
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  let alreadySeen = false;
+  try { alreadySeen = sessionStorage.getItem('talha-welcome-seen') === 'yes'; } catch {}
+  if (alreadySeen || reduceMotion.matches || !intro.showModal) {
+    intro.remove();
+    return;
+  }
+  let dismissed = false;
+  let revealTimer;
+  function finishWelcome() {
+    clearTimeout(revealTimer);
+    document.documentElement.classList.remove('welcome-active');
+    if (intro.open) intro.close();
+    intro.remove();
+    document.body.classList.add('welcome-revealed');
+  }
+  function dismissWelcome() {
+    if (dismissed) return;
+    dismissed = true;
+    clearTimeout(revealTimer);
+    try { sessionStorage.setItem('talha-welcome-seen', 'yes'); } catch {}
+    if (reduceMotion.matches) {
+      finishWelcome();
+      return;
+    }
+    intro.classList.add('welcome-leaving');
+    revealTimer = setTimeout(finishWelcome, 600);
+  }
+  intro.querySelector('.welcome-skip').addEventListener('click', dismissWelcome);
+  intro.addEventListener('cancel', event => { event.preventDefault(); dismissWelcome(); });
+  reduceMotion.addEventListener('change', event => { if (event.matches && intro.isConnected) finishWelcome(); });
+  intro.showModal();
+  document.documentElement.classList.add('welcome-active');
+  revealTimer = setTimeout(dismissWelcome, 2200);
+})();
+</script><header><nav class="wrap" aria-label="Main navigation"><a class="brand" href="#top"><svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 29 16 4l18 25z M7 25l9-16 12 16z M12 22l5-8 6 8z"/></svg><span><b>MT</b><em>folio</em></span></a><div class="links"><a href="#skills">Skills</a><a href="#work">Work</a><a href="#workflow" class="flow-link">Workflow</a><a href="#profile">Résumé</a><a href="#faq" class="faq-nav">FAQ</a><a href="#contact">Contact ↗</a></div></nav></header><main><section class="hero"><div class="wrap poster"><div class="copy"><span class="kicker mono">Independent AI engineer</span><h1>Muhammad<br><span>Talha.</span></h1><p class="role">AI Engineer</p><p class="intro">I connect AI agents, APIs, and n8n workflows to turn manual research into structured, reviewable data.</p><div class="ctas"><a class="action" href="#work">Explore projects <b aria-hidden="true">↗</b></a><a class="cv" href="Muhammad-Talha-CV.docx" download>Download CV ↓</a></div></div><figure class="orbit-panel"><div class="orbit-heading mono"><span>◉ &nbsp; Network atlas</span><span>FIG. 01</span></div><canvas id="orbit" aria-label="Animated network sphere with three orbiting signals"></canvas><figcaption><span class="mono">Connected systems &nbsp; / &nbsp; AI</span><button id="globe-motion" type="button">Pause orbit</button></figcaption></figure></div></section><div class="rail"><div class="wrap mono"><span>✳ &nbsp; Web development</span><span>✳ &nbsp; App development</span><span>✳ &nbsp; Branding</span><span>✳ &nbsp; Automation</span><span>✳ &nbsp; Email marketing</span></div></div>
 <section class="wrap content skill-section" id="skills" aria-labelledby="skill-title"><span class="mono label">Engineering skills</span><div class="sectionhead"><h2 id="skill-title">What I can <i>do.</i></h2><small>Scroll to explore ↓</small></div><div class="skill-deck"><article class="skill-tile" style="--tone:#88f9c0;--i:0"><div class="skill-top"><strong>Web development</strong><small>01 / 05</small></div><svg class="skill-art" viewBox="0 0 380 230" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="32" y="36" width="270" height="153" rx="12"/><path d="M32 63h270M54 85h99v72H54zM171 88h95m-95 19h67m-67 22h83"/><rect x="260" y="86" width="68" height="125" rx="10"/><path d="M282 193h24"/></g></svg><h3 class="skill-word" aria-label="Web development" data-word="Develop.">Develop.</h3><div class="skill-foot"><p>I build responsive websites with clear navigation, readable layouts, and accessible forms. I design for the small screen first, then use motion and hover feedback to guide visitors toward their next step.</p><small>HTML · CSS · JavaScript</small></div></article><article class="skill-tile" style="--tone:#bc9cff;--i:1"><div class="skill-top"><strong>App development</strong><small>02 / 05</small></div><svg class="skill-art" viewBox="0 0 380 230" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="102" y="15" width="146" height="201" rx="22"/><rect x="120" y="55" width="110" height="60" rx="5"/><path d="M150 34h50m-74 104h95m-95 17h61m-61 17h82m-55 24h42"/><path d="M252 68h44v35h37m-81 54h73"/></g></svg><h3 class="skill-word" aria-label="App development" data-word="Build.">Build.</h3><div class="skill-foot"><p>I build web apps around a task people need to finish. In Studify, that means choosing a paper, working through a timed mock, and returning to saved progress. The interface, API, and data storage support the same flow.</p><small>Next.js · TypeScript · Supabase</small></div></article><article class="skill-tile" style="--tone:#91d7ff;--i:2"><div class="skill-top"><strong>Branding</strong><small>03 / 05</small></div><svg class="skill-art" viewBox="0 0 380 230" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="48" y="38" width="248" height="143" rx="11"/><path d="M76 137l30-77 30 77m-49-28h38m37-37h88m-88 22h61"/><circle cx="182" cy="139" r="16"/><circle cx="219" cy="139" r="16"/><circle cx="256" cy="139" r="16"/></g></svg><h3 class="skill-word" aria-label="Branding" data-word="Brand.">Brand.</h3><div class="skill-foot"><p>I give a brand a consistent look across its website and emails. I start with the audience and tone, then choose a color palette, type hierarchy, and reusable layout rules so each new page feels familiar.</p><small>Visual identity · Typography · Art direction</small></div></article><article class="skill-tile" style="--tone:#c8f68d;--i:3"><div class="skill-top"><strong>Automation</strong><small>04 / 05</small></div><svg class="skill-art" viewBox="0 0 380 230" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M80 118h46V60h65m-65 58v59h65m54-116h36v57h34m-70 59h36v-59"/><rect x="25" y="95" width="55" height="46" rx="10"/><rect x="190" y="37" width="55" height="46" rx="10"/><rect x="190" y="154" width="55" height="46" rx="10"/><circle cx="329" cy="118" r="17"/></g></svg><h3 class="skill-word" aria-label="Automation" data-word="Automate.">Automate.</h3><div class="skill-foot"><p>I connect n8n, Python APIs, and AI tools to handle repetitive research. In Lead Radar, a business moves from discovery through website checks and qualification before a structured lead record lands in Google Sheets for review.</p><small>n8n · Python · API integrations</small></div></article><article class="skill-tile" style="--tone:#e2afff;--i:4"><div class="skill-top"><strong>Email marketing</strong><small>05 / 05</small></div><svg class="skill-art" viewBox="0 0 380 230" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="45" y="48" width="236" height="139" rx="13"/><path d="M49 56l114 83L277 56M50 178l73-66m151 66-72-66"/><circle cx="288" cy="163" r="37"/><path d="M271 163l12 12 23-29"/></g></svg><h3 class="skill-word" aria-label="Email marketing" data-word="Engage.">Engage.</h3><div class="skill-foot"><p>I plan email sequences around what a subscriber needs next. A welcome email sets expectations, a follow-up shares a useful example, and each message has one clear action. I use clicks and replies to decide what to test next.</p><small>Audience segmentation · Email copy · Campaign planning</small></div></article></div></section><section id="work" class="wrap content"><span class="mono label">01 &nbsp;/&nbsp; Portfolio</span><div class="sectionhead"><h2>Selected <i>work.</i></h2><small>Project &nbsp; <span id="entry-count">01 / 03</span></small></div><div class="project-browser"><div class="project-select" role="group" aria-label="Select a project"><button data-project="0"><small>01</small> Studify <span>↗</span></button><button data-project="1"><small>02</small> LeadRadar AI <span>↗</span></button><button data-project="2"><small>03</small> Promptly <span>↗</span></button></div><div class="cards" id="cards"></div></div><article class="case" id="workflow"><div class="case-copy"><small class="label">Workflow case study &nbsp; / &nbsp; Lead Radar AI</small><h3>From a business website to a lead record</h3><p class="case-lead">A list of business names still leaves someone to check every website. I used n8n to connect discovery, website analysis, and qualification so the output is ready for a person to review.</p><div class="case-grid"><article><small>01 / Input</small><h4>Define the search</h4><p>Start with a target market or service category. Collect the public website and online presence of each candidate business.</p></article><article><small>02 / Decision</small><h4>Check service fit</h4><p>Evaluate website signals against the service being offered. Rule-based filters and AI-assisted analysis help prioritize prospects.</p></article><article><small>03 / Handoff</small><h4>Make leads reviewable</h4><p>Write filtered records to Google Sheets in a consistent structure. A person can inspect the results before deciding whom to contact.</p></article></div></div><div class="instrument" aria-label="Interactive lead research workflow"><div class="instrument-title mono"><span class="signal"></span> Lead research engine <span>FIG 01</span></div><svg class="engine" viewBox="0 0 520 330" aria-label="Five stages connected to a central processor"><defs><pattern id="grid" width="16" height="16" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#ab91ff" opacity=".42"/></pattern><linearGradient id="chip" x2="1" y2="1"><stop stop-color="#b89bff"/><stop offset=".42" stop-color="#7749ed"/><stop offset="1" stop-color="#342065"/></linearGradient><linearGradient id="side"><stop stop-color="#21113f"/><stop offset=".5" stop-color="#42178b"/><stop offset="1" stop-color="#0a151c"/></linearGradient></defs><rect width="520" height="330" fill="url(#grid)"/><path d="M80 107 L80 131 L162 156 L260 185" stroke="#a687eb" stroke-width="2" fill="none"/><path class="current" style="animation-delay:-0.0s" d="M80 107 L80 131 L162 156 L260 185"/><path d="M262 54 L262 94 L259 134 L260 185" stroke="#a687eb" stroke-width="2" fill="none"/><path class="current" style="animation-delay:-0.5s" d="M262 54 L262 94 L259 134 L260 185"/><path d="M441 111 L441 134 L353 157 L260 185" stroke="#a687eb" stroke-width="2" fill="none"/><path class="current" style="animation-delay:-1.0s" d="M441 111 L441 134 L353 157 L260 185"/><path d="M418 280 L418 254 L343 229 L260 185" stroke="#a687eb" stroke-width="2" fill="none"/><path class="current" style="animation-delay:-1.5s" d="M418 280 L418 254 L343 229 L260 185"/><path d="M102 278 L102 252 L168 226 L260 185" stroke="#a687eb" stroke-width="2" fill="none"/><path class="current" style="animation-delay:-2.0s" d="M102 278 L102 252 L168 226 L260 185"/><path d="M145 210l115 -66 115 66v10l-115 66 -115 -66z" fill="url(#side)" stroke="#af87ea"/><path d="M145 210l115 -66 115 66 -115 66z" fill="#372265" stroke="#af87ea"/><path d="M145 195l115 -66 115 66v10l-115 66 -115 -66z" fill="url(#side)" stroke="#af87ea"/><path d="M145 195l115 -66 115 66 -115 66z" fill="#372265" stroke="#af87ea"/><path d="M145 181l115 -66 115 66v10l-115 66 -115 -66z" fill="url(#side)" stroke="#af87ea"/><path d="M145 181l115 -66 115 66 -115 66z" fill="#372265" stroke="#88f9c0"/><path d="M145 167l115 -66 115 66v10l-115 66 -115 -66z" fill="url(#side)" stroke="#af87ea"/><path d="M145 167l115 -66 115 66 -115 66z" fill="url(#chip)" stroke="#af87ea"/><g transform="matrix(.9 .49 -.9 .49 260 167)" fill="none"><rect x="-52" y="-52" width="104" height="104" rx="12" stroke="#ddc9ff"/><rect x="-47" y="-47" width="94" height="94" rx="10" fill="#210d4c"/><g stroke="#88f9c0" stroke-width="4"><path d="M-24 13l24 -26 24 26"/><circle cx="-24" cy="13" r="6"/><circle cx="0" cy="-13" r="6"/><circle cx="24" cy="13" r="6"/></g></g><g class="station" tabindex="0" role="button" aria-label="Stage 1, Discover" aria-pressed="true" data-stage="0"><title>Discover</title><rect x="35" y="83" width="90" height="67" fill="transparent"/><circle cx="80" cy="107" r="17"/><text x="80" y="111">01</text><text class="node-label" x="80" y="142">DISCOVER</text></g><g class="station" tabindex="0" role="button" aria-label="Stage 2, Collect" aria-pressed="false" data-stage="1"><title>Collect</title><rect x="217" y="30" width="90" height="67" fill="transparent"/><circle cx="262" cy="54" r="17"/><text x="262" y="58">02</text><text class="node-label" x="262" y="89">COLLECT</text></g><g class="station" tabindex="0" role="button" aria-label="Stage 3, Evaluate" aria-pressed="false" data-stage="2"><title>Evaluate</title><rect x="396" y="87" width="90" height="67" fill="transparent"/><circle cx="441" cy="111" r="17"/><text x="441" y="115">03</text><text class="node-label" x="441" y="146">EVALUATE</text></g><g class="station" tabindex="0" role="button" aria-label="Stage 4, Qualify" aria-pressed="false" data-stage="3"><title>Qualify</title><rect x="373" y="256" width="90" height="67" fill="transparent"/><circle cx="418" cy="280" r="17"/><text x="418" y="284">04</text><text class="node-label" x="418" y="315">QUALIFY</text></g><g class="station" tabindex="0" role="button" aria-label="Stage 5, Export" aria-pressed="false" data-stage="4"><title>Export</title><rect x="57" y="254" width="90" height="67" fill="transparent"/><circle cx="102" cy="278" r="17"/><text x="102" y="282">05</text><text class="node-label" x="102" y="313">EXPORT</text></g></svg><div class="readout"><small id="stage-count">Stage 01 / 05</small><strong id="stage-name">Discover</strong><p id="stage-desc">Search a target market or service category for businesses to review.</p></div><div class="controls"><small>Hover or tap a stage</small><button type="button" id="motion">Pause flow</button></div></div></article></section>
 <section class="wrap content profile" id="profile"><div><span class="mono label">02 &nbsp;/&nbsp; Résumé</span><h2>My <i>practice.</i></h2><a class="source" href="https://github.com/Talha-dev27">Explore GitHub ↗</a></div><div class="history"><small>Experience &nbsp;/&nbsp; Self-employed · Remote</small><h3>Independent AI Engineer</h3><p>I build n8n workflows for data discovery, validation, and delivery. My lead research pipelines combine website data, rule-based filters, and AI analysis to qualify prospects for review in Google Sheets.</p><p>I develop REST APIs with FastAPI and Flask and troubleshoot integrations using Git, Docker, and cloud tools.</p><div class="tags"><span class="badge">n8n</span><span class="badge">Python</span><span class="badge">FastAPI</span><span class="badge">Flask</span><span class="badge">Docker</span><span class="badge">Google Sheets</span></div><hr><small>Automation in practice</small><h3>How I build automations</h3><p>I start with one real example of the task. What starts it, which fields does the next tool need, and where should a person make the final decision? Those answers define the workflow.</p><div class="methods"><article><h4>Workflow design</h4><p>I split the flow into small steps in n8n. In a lead research workflow, one step finds candidate websites, another gathers evidence, and a third checks whether each candidate fits the target.</p></article><article><h4>API development</h4><p>When two services expect different formats, I use Python to map fields and validate the handoff. The research step can then pass a business name, website, and assessment to the next stage together.</p></article><article><h4>Data handoffs</h4><p>I give each output a clear destination. In Lead Radar, a spreadsheet lets someone compare candidates, inspect the qualification notes, and decide which businesses merit follow-up.</p></article><article><h4>Delivery and debugging</h4><p>To troubleshoot an integration, I follow a record through the workflow and inspect each handoff. That helps distinguish a missing field from a failed API request or a filter that excluded the record.</p></article></div><hr><h3>Professional development</h3><details class="course"><summary>Professional coursework <span>＋</span></summary><ul><li>Python Programming (Basic to Advanced)</li><li>AI Automation Mastery Course</li><li>Email Marketing Specialist Course</li><li>Prompt Engineering</li></ul></details></div></section><section id="faq" class="wrap content inquiry-layout"><div><span class="mono label">03 &nbsp;/&nbsp; FAQ</span><h2>Common <i>questions.</i></h2></div><div class="questions"><details class="question"><summary><small>01</small><span>What kinds of projects can I bring you?</span><b aria-hidden="true"></b></summary><p>Bring me a website or web app brief, a brand you want to develop, a manual workflow you want to automate, or an email sequence you want to plan. A short description of your audience and goal is enough to start.</p></details><details class="question"><summary><small>02</small><span>Can you connect tools I already use?</span><b aria-hidden="true"></b></summary><p>Yes. I build integrations around REST APIs, web data, and spreadsheets. Tell me which tools you use, what starts the workflow, and where the result needs to go.</p></details><details class="question"><summary><small>03</small><span>Where can I see your code?</span><b aria-hidden="true"></b></summary><p>Open Studify or LeadRadar AI in Selected Work for the public source code. Promptly’s project notes explain its generation flow, technology, and browser storage.</p></details><details class="question"><summary><small>04</small><span>What should I include in a project inquiry?</span><b aria-hidden="true"></b></summary><p>Describe one task you do today, the tools involved, and what a successful result would look like. A short example is enough to start the conversation.</p></details></div></section>
 <section id="contact" class="wrap content inquiry-layout"><div class="contact-intro"><span class="mono label">04 &nbsp;/&nbsp; Project inquiry</span><h2>Get in <i>touch.</i></h2><p>What would you like to build or automate? Tell me how the task works today and what you’d like to change.</p><p class="contact-location mono">Available for remote projects</p></div>
