@@ -31,6 +31,15 @@ header{background:#0a0d0beF;border-color:#343d30}nav.wrap{height:78px}
 @media(prefers-reduced-motion:reduce){#welcome-intro{display:none}.welcome-portrait,.welcome-title-line>span{animation:none}.ambient-control{display:none}}
 @media print{#cyber-background,.ambient-control,.scroll-meter{display:none}}
 
+/* Purple signal palette */
+:root{--ink:#f5efff;--paper:#090613;--line:#432752;--moss:#c170ff;--accent:#e273ff;--purple:#9b61c9}
+body{background:#090613}.brand b,.kicker:before,.kicker:after,.role,h2 i,.skill-foot small,.project-select button[aria-pressed=true],.art small,.question b,.welcome-signature,.welcome-eyebrow,#welcome-title span,.welcome-bottom span:last-child{color:#cf75ff}
+header{background:#0c0715ef;border-color:#4e2e62}.hero{background:radial-gradient(ellipse at 78% 18%,#6327773b,transparent 50%);border-color:#4a2a5b}.hero:before{border-color:#b267df25}.hero h1 span{background:linear-gradient(#fff,#c8a7df);background-clip:text;-webkit-background-clip:text}.role:before{color:#ad7bc7}.intro{color:#c9b9d7}.label,.kicker,.sectionhead small{color:#c5a9d7}
+.links a:last-child,.action{background:#cc6dff;border-color:#e5a5ff;color:#18091f}.cv{border-color:#795391}.orbit-panel{background:#180d25a8;border-color:#81549c}.orbit-panel:before{border-color:#d07aff}.orbit-heading{color:#d07aff;border-color:#704986}.orbit-panel figcaption{color:#c1add0}#globe-motion,.controls button{background:#1d102b;border-color:#81559b;color:#f0dcff}.rail{background:#1a0e27d9;border-color:#5c3870}.rail .wrap{color:#d783ff}.content{border-color:#4a2e5b}
+.skill-tile,.skill-tile:nth-child(even){--tone:#d47cff!important;background:linear-gradient(110deg,#1b0d2aeF,#12091ef5);border-color:#754595}.skill-tile:before{background:linear-gradient(90deg,transparent 49.7%,#c47cff18 50%,transparent 50.3%),linear-gradient(transparent 49.7%,#c47cff18 50%,transparent 50.3%)}.skill-top small{color:#c8b4d6}.skill-word{-webkit-text-stroke:1px #956cad}.skill-word:after{color:#f8eaff}.skill-foot p{color:#d4c5df}.project-select button{background:#160c23ef;border-color:#563570;color:#cfbcdb}.project-select button[aria-pressed=true]{border-color:#d070ff;background:#34184a}.cards details{background:#160c23ef;border-color:#603c75}.case{background:#170d23ef;border-color:#643e78}.instrument{background:#130a1ef5;border-color:#67417c}.station circle{fill:#261337;stroke:#a36bc4}.station[aria-pressed=true] circle{fill:#d476ff}.station[aria-pressed=true] text:not(.node-label){fill:#180a20}.current{stroke:#d476ff}.readout,.controls{border-color:#543569}.brief{background:#170d23f5;border-color:#673f7c}.brief input,.brief select,.brief textarea{background:#0f0717;border-color:#523268;color:#f5eaff}.course{background:#1a0d28ea}.question{background:#100818b0}.history>small,.case-grid small,.question small{color:#d090ee}.foot{color:#c4a9d4}.signal{background:#d476ff;box-shadow:0 0 8px #d476ff90}
+@media(hover:hover) and (pointer:fine){button:hover,.action:hover,.cv:hover{box-shadow:4px 4px 0 #d476ff2a;border-color:#e5a5ff}.action:hover,.links a:last-child:hover{background:#efb0ff;color:#21082e}a:hover,.question summary:hover{color:#df8dff}}
+#welcome-intro,#welcome-intro::backdrop{background:#090613}.welcome-halo{background:linear-gradient(90deg,#090613 5%,transparent 70%),linear-gradient(transparent 98%,#d476ff0b 98%)}.welcome-grid{background:linear-gradient(#c47cff1a 1px,transparent 1px),linear-gradient(90deg,#c47cff1a 1px,transparent 1px)}.welcome-skip{border-color:#8653a0;background:#180d25;color:#e7d4f3}#welcome-title span{color:#d476ff}.welcome-progress{background:#d476ff;box-shadow:0 0 15px #d476ff90}.ambient-control{border-color:#8951a5;background:#140a20ed;color:#d476ff}.scroll-meter{background:#d476ff}
+
 </style></head><body id="top"><canvas id="cyber-background" aria-hidden="true"></canvas><div class="scroll-meter" aria-hidden="true"></div><button type="button" class="ambient-control" id="ambient-motion" aria-pressed="false">Pause background</button><dialog id="welcome-intro" aria-labelledby="welcome-title" aria-describedby="welcome-description">
   <div class="welcome-grid" aria-hidden="true"></div>
   <img class="welcome-portrait" src="assets/talha-dots.jpg" alt="" fetchpriority="high"><div class="welcome-halo" aria-hidden="true"></div>
@@ -159,7 +168,7 @@ function paintOrbit() {
   for(const [x,y,z] of surface) {
     const [px,py,depth]=project(x,y,z);
     if(depth<0) continue;
-    brush.fillStyle='rgba(194,255,77,'+(.13+.7*depth)+')';
+  brush.fillStyle='rgba(193,112,255,'+(.13+.7*depth)+')';
     brush.fillRect(px,py,1.15+depth*.5,1.15+depth*.5);
   }
   for(let route=0;route<3;route++){
@@ -275,20 +284,20 @@ document.querySelectorAll('.project-browser,.case,.inquiry-layout,.profile').for
  function draw(){
   ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,width,height);
   const step=width<600?86:110,shift=(smoothScroll*.12)%step;
-  ctx.strokeStyle='rgba(170,193,137,.055)';ctx.lineWidth=1;ctx.beginPath();
+  ctx.strokeStyle='rgba(177,125,220,.065)';ctx.lineWidth=1;ctx.beginPath();
   for(let x=24;x<width;x+=step){ctx.moveTo(x,0);ctx.lineTo(x,height)}
   for(let y=-shift;y<height;y+=step){ctx.moveTo(0,y);ctx.lineTo(width,y)}ctx.stroke();
   const positions=points.slice(0,width<600?22:42).map((p,i)=>({x:p.x*width+Math.sin(tick*.12+i)*12,y:((p.y*height-smoothScroll*p.speed*.16+tick*p.speed*4)%(height+90)+height+90)%(height+90)-45}));
   for(let i=0;i<positions.length;i++){
-   const p=positions[i];ctx.fillStyle=i%4===0?'rgba(194,255,77,.42)':'rgba(180,194,160,.2)';ctx.fillRect(p.x-1,p.y-1,2,2);
-   if(i%4===0){ctx.strokeStyle='rgba(194,255,77,.14)';ctx.strokeRect(p.x-4,p.y-4,8,8)}
+   const p=positions[i];ctx.fillStyle=i%4===0?'rgba(209,109,255,.45)':'rgba(174,151,205,.22)';ctx.fillRect(p.x-1,p.y-1,2,2);
+   if(i%4===0){ctx.strokeStyle='rgba(193,112,255,.18)';ctx.strokeRect(p.x-4,p.y-4,8,8)}
    for(let j=i+1;j<positions.length;j++){const q=positions[j],distance=Math.hypot(p.x-q.x,p.y-q.y);if(distance>165)continue;
-    ctx.strokeStyle='rgba(194,255,77,'+(.1*(1-distance/165))+')';ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,p.y);ctx.lineTo(q.x,q.y);ctx.stroke();
+    ctx.strokeStyle='rgba(193,112,255,'+(.12*(1-distance/165))+')';ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,p.y);ctx.lineTo(q.x,q.y);ctx.stroke();
    }
   }
   // Slow signal passing down the grid, offset by scroll position.
   const scan=((tick*22+smoothScroll*.22)%(height+180))-90;
-  const glow=ctx.createLinearGradient(0,scan-75,0,scan+75);glow.addColorStop(0,'transparent');glow.addColorStop(.5,'rgba(194,255,77,.025)');glow.addColorStop(1,'transparent');ctx.fillStyle=glow;ctx.fillRect(0,scan-75,width,150);
+  const glow=ctx.createLinearGradient(0,scan-75,0,scan+75);glow.addColorStop(0,'transparent');glow.addColorStop(.5,'rgba(193,112,255,.04)');glow.addColorStop(1,'transparent');ctx.fillStyle=glow;ctx.fillRect(0,scan-75,width,150);
  }
  function loop(time){if(time-last>40){tick+=Math.min(time-last,100)/1000;smoothScroll+=(scroll-smoothScroll)*.14;draw();last=time}frame=requestAnimationFrame(loop)}
  function sync(){cancelAnimationFrame(frame);toggle.textContent=paused?'Play background':'Pause background';toggle.setAttribute('aria-pressed',String(paused));if(!paused&&!document.hidden)frame=requestAnimationFrame(loop);else draw()}
