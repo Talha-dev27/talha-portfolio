@@ -318,4 +318,22 @@ document.querySelectorAll('.project-browser,.case,.inquiry-layout,.profile').for
  resize();sync();
 })();
 
+</script><script>
+(()=>{
+  const heroIntro=document.querySelector('.hero .intro');
+  if(heroIntro) heroIntro.textContent='I design and ship AI-powered systems that combine language models, APIs, and reliable workflows. From lead intelligence to product features, I turn unstructured inputs into useful, reviewable decisions—with human checks where they matter.';
+
+  const history=document.querySelector('.history');
+  if(!history) return;
+  const systemsHeading=[...history.querySelectorAll('h3')].find(item=>item.textContent.includes('How I build automations'));
+  const systemsLabel=[...history.querySelectorAll('small')].find(item=>item.textContent.includes('Automation in practice'));
+  if(systemsLabel) systemsLabel.textContent='AI systems in practice';
+  if(systemsHeading){
+    systemsHeading.textContent='Building reliable AI systems';
+    const lead=systemsHeading.nextElementSibling;
+    if(lead) lead.textContent='I start by mapping the decision a system needs to support, then define the data, context, tools, and human review points around it. That keeps each AI workflow useful, traceable, and easy to improve.';
+  }
+  const methodTitles=['AI systems design','Model and API integration','Human-in-the-loop review','Testing and iteration'];
+  history.querySelectorAll('.methods h4').forEach((heading,index)=>{if(methodTitles[index]) heading.textContent=methodTitles[index]});
+})();
 </script></body></html>
